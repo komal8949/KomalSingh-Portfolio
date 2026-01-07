@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Komal Singh Shekhawat</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        body {
+            background: #1a1a1a;
+            color: #ffffff;
+        }
+        .card {
+            background: #2d2d2d;
+            border: 1px solid #404040;
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 168, 255, 0.1);
+            border-color: #00a8ff;
+        }
+        .nav-link {
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .nav-link:hover {
+            color: #00a8ff;
+        }
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #00a8ff;
+        }
+        .project-card {
+            background: #2d2d2d;
+            border: 1px solid #404040;
+            transition: all 0.4s ease;
+            overflow: hidden;
+        }
+        .project-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 168, 255, 0.15);
+            border-color: #00a8ff;
+        }
+        .project-card img {
+            transition: transform 0.4s ease;
+        }
+        .project-card:hover img {
+            transform: scale(1.1);
+        }
+        .filter-btn {
+            background: #2d2d2d;
+            border: 1px solid #404040;
+            color: #b0b0b0;
+            transition: all 0.3s ease;
+        }
+        .filter-btn.active {
+            background: #00a8ff;
+            color: white;
+            border-color: #00a8ff;
+        }
+        .filter-btn:hover {
+            border-color: #00a8ff;
+            color: #00a8ff;
+        }
+        .filter-btn.active:hover {
+            color: white;
+        }
+        .tech-tag {
+            background: rgba(0, 168, 255, 0.2);
+            color: #00a8ff;
+            border: 1px solid rgba(0, 168, 255, 0.3);
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.6s ease;
+        }
+        .search-input {
+            background: #2d2d2d;
+            border: 1px solid #404040;
+            color: white;
+        }
+        .search-input:focus {
+            border-color: #00a8ff;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(0, 168, 255, 0.2);
+        }
+        .modal {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+        }
+        .modal-content {
+            background: #2d2d2d;
+            border: 1px solid #404040;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-gray-900/95 backdrop-blur-sm border-b border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <span class="text-xl font-bold text-white">Portfolio</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="index.html" class="nav-link text-gray-300 hover:text-blue-400 px-3 py-2 text-sm font-medium">Overview</a>
+                        <a href="about.html" class="nav-link text-gray-300 hover:text-blue-400 px-3 py-2 text-sm font-medium">About Me</a>
+                        <a href="resume.html" class="nav-link text-gray-300 hover:text-blue-400 px-3 py-2 text-sm font-medium">Resume</a>
+                        <a href="projects.html" class="nav-link active text-white hover:text-blue-400 px-3 py-2 text-sm font-medium">Projects</a>
+                        <a href="experience.html" class="nav-link text-gray-300 hover:text-blue-400 px-3 py-2 text-sm font-medium">Experience</a>
+                        <a href="contact.html" class="nav-link text-gray-300 hover:text-blue-400 px-3 py-2 text-sm font-medium">Contact</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-gray-800 border-t border-gray-700">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="index.html" class="block px-3 py-2 text-gray-300 hover:text-white">Overview</a>
+                <a href="about.html" class="block px-3 py-2 text-gray-300 hover:text-white">About Me</a>
+                <a href="resume.html" class="block px-3 py-2 text-gray-300 hover:text-white">Resume</a>
+                <a href="projects.html" class="block px-3 py-2 text-white font-medium">Projects</a>
+                <a href="experience.html" class="block px-3 py-2 text-gray-300 hover:text-white">Experience</a>
+                <a href="contact.html" class="block px-3 py-2 text-gray-300 hover:text-white">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 bg-gradient-to-br from-gray-900 to-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center reveal">
+                <h1 class="text-5xl font-bold text-white mb-6">My Projects</h1>
+                <p class="text-xl text-gray-400 mb-8">Data-driven solutions and innovative applications</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search and Filter Section -->
+    <section class="py-12 bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row gap-6 items-center justify-between mb-12">
+                <!-- Search Bar -->
+                <div class="w-full lg:w-1/3">
+                    <input 
+                        type="text" 
+                        id="search-input" 
+                        placeholder="Search projects..." 
+                        class="search-input w-full px-4 py-3 rounded-lg"
+                    >
+                </div>
+                
+                <!-- Filter Buttons -->
+                <div class="flex flex-wrap gap-3">
+                    <button class="filter-btn active px-4 py-2 rounded-lg font-medium" data-filter="all">
+                        All Projects
+                    </button>
+                    <button class="filter-btn px-4 py-2 rounded-lg font-medium" data-filter="react">
+                        React
+                    </button>
+                    <button class="filter-btn px-4 py-2 rounded-lg font-medium" data-filter="python">
+                        Python
+                    </button>
+                    <button class="filter-btn px-4 py-2 rounded-lg font-medium" data-filter="data-viz">
+                        Data Viz
+                    </button>
+                    <button class="filter-btn px-4 py-2 rounded-lg font-medium" data-filter="full-stack">
+                        Full Stack
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Grid -->
+<section class="pb-20 bg-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <!-- DATA ANALYTICS PROJECT 1 -->
+            <div class="project-card rounded-xl overflow-hidden reveal"
+                 data-tags="data-analytics powerbi python sql"
+                 data-title="Sales Performance Dashboard">
+                <img src="./resources/project-1.jpg" alt="Sales Dashboard" class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold text-white mb-2">Sales Performance Dashboard</h3>
+                    <p class="text-gray-400 mb-4">
+                        End-to-end sales analytics project analyzing revenue, customer segments, and product performance using Power BI.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="tech-tag px-3 py-1 rounded-full text-sm">Power BI</span>
+                        <span class="tech-tag px-3 py-1 rounded-full text-sm">Python</span>
+                        <span class="tech-tag px-3 py-1 rounded-full text-sm">SQL</span>
+                        <span class="tech-tag px-3 py-1 rounded-full text-sm">Excel</span>
+                    </div>
+                    <button class="text-blue-400 hover:text-blue-300 font-medium">
+                        View Details
+                    </button>
+                </div>
+            </div>
+
+            <!-- DATA ANALYTICS PROJECT 2 -->
+            <div class="project-card rounded-xl overflow-hidden reveal"
+                 data-tags="data-analytics powerbi eda"
+                 data-title="Customer Churn Analysis">
+                <img src="./resources/project-2.jpg" alt="Customer Churn Analysis" class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold text-white mb-2">Customer Churn Analysis</h3>
+                    <p class="text-gray-400 mb-4">
+                        Analyzed customer behavior to identify churn drivers and created interactive dashboards for retention insights.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="tech-tag px-3 py-1 rounded-full text-sm">Power BI</span>
+                        <span class="tech-tag px-3 py-1 rounded-full text-sm">Python</span>
+                        <span class="tech-tag px-3 py-1 rounded-full text-sm">EDA</span>
+                        <span class="tech-tag px-3 py-1 rounded-full text-sm">Pandas</span>
+                    </div>
+                    <button class="text-blue-400 hover:text-blue-300 font-medium">
+                        View Details
+                    </button>
+                </div>
+            </div>
+
+            <!-- MACHINE LEARNING PROJECT 1 -->
+            <div class="project-card rounded-xl overflow-hidden reveal"
+                 data-tags="machine-learning classification python"
+                 data-title="Image Classification System">
+                <img src="./resources/project-3.jpg" alt="Image Classification" class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold text-white mb-2">Image Classification System</h3>
+                    <p class="text-gray-400 mb-4">
+                        Built an image classification model using deep learning to classify images into multiple categories.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="tech-tag px-3 py-1 rounded-full text-sm">Python</span>
+                        <span class="tech-tag px-3 py-1 rounded-full text-sm">PyTorch</span>
+                        <span class="tech-tag px-3 py-1 rounded-full text-sm">CNN</span>
+                        <span class="tech-tag px-3 py-1 rounded-full text-sm">Computer Vision</span>
+                    </div>
+                    <button class="text-blue-400 hover:text-blue-300 font-medium">
+                        View Details
+                    </button>
+                </div>
+            </div>
+
+            <!-- MACHINE LEARNING PROJECT 2 -->
+            <div class="project-card rounded-xl overflow-hidden reveal"
+                 data-tags="machine-learning prediction python"
+                 data-title="Stock Price Prediction">
+                <img src="./resources/project-4.jpg" alt="Stock Prediction" class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold text-white mb-2">Stock Price Prediction</h3>
+                    <p class="text-gray-400 mb-4">
+                        Time-series forecasting model to predict stock prices using historical market data.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="tech-tag px-3 py-1 rounded-full text-sm">Python</span>
+                        <span class="tech-tag px-3 py-1 rounded-full text-sm">Machine Learning</span>
+                        <span class="tech-tag px-3 py-1 rounded-full text-sm">Pandas</span>
+                        <span class="tech-tag px-3 py-1 rounded-full text-sm">Scikit-learn</span>
+                    </div>
+                    <button class="text-blue-400 hover:text-blue-300 font-medium">
+                        View Details
+                    </button>
+                </div>
+            </div>
+
+            <!-- DATA ENGINEERING PROJECT 1 -->
+            <div class="project-card rounded-xl overflow-hidden reveal"
+                 data-tags="data-engineering pipeline python"
+                 data-title="ETL Data Pipeline">
+                <img src="./resources/project-5.jpg" alt="ETL Pipeline" class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold text-white mb-2">ETL Data Pipeline</h3>
+                    <p class="text-gray-400 mb-4">
+                        Designed an automated ETL pipeline to extract, transform, and load data for analytics reporting.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="tech-tag px-3 py-1 rounded-full text-sm">Python</span>
+                        <span class="tech-tag px-3 py-1 rounded-full text-sm">SQL</span>
+                        <span class="tech-tag px-3 py-1 rounded-full text-sm">ETL</span>
+                        <span class="tech-tag px-3 py-1 rounded-full text-sm">Pandas</span>
+                    </div>
+                    <button class="text-blue-400 hover:text-blue-300 font-medium">
+                        View Details
+                    </button>
+                </div>
+            </div>
+
+            <!-- DATA ENGINEERING PROJECT 2 -->
+            <div class="project-card rounded-xl overflow-hidden reveal"
+                 data-tags="data-engineering cloud aws"
+                 data-title="Cloud-Based Data Pipeline">
+                <img src="./resources/project-6.jpg" alt="Cloud Data Pipeline" class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold text-white mb-2">Cloud-Based Data Pipeline</h3>
+                    <p class="text-gray-400 mb-4">
+                        Built a scalable cloud data pipeline for ingestion, storage, and analytics using AWS services.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="tech-tag px-3 py-1 rounded-full text-sm">AWS</span>
+                        <span class="tech-tag px-3 py-1 rounded-full text-sm">Python</span>
+                        <span class="tech-tag px-3 py-1 rounded-full text-sm">Data Engineering</span>
+                        <span class="tech-tag px-3 py-1 rounded-full text-sm">Cloud</span>
+                    </div>
+                    <button class="text-blue-400 hover:text-blue-300 font-medium">
+                        View Details
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+    <!-- Project Modal -->
+    <div id="project-modal" class="modal fixed inset-0 z-50 hidden items-center justify-center p-4">
+        <div class="modal-content rounded-xl max-w-4xl w-full p-8">
+            <div class="flex justify-between items-start mb-6">
+                <h2 id="modal-title" class="text-3xl font-bold text-white"></h2>
+                <button onclick="closeProjectModal()" class="text-gray-400 hover:text-white text-2xl">×</button>
+            </div>
+            
+            <div id="modal-content" class="space-y-6">
+                <!-- Dynamic content will be inserted here -->
+            </div>
+            
+            <div class="flex gap-4 mt-8">
+                <a href="#" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-all">
+                    View Live Demo
+                </a>
+                <a href="#" class="border border-gray-600 text-gray-300 px-6 py-3 rounded-lg font-medium hover:border-gray-400 hover:text-white transition-all">
+                    View Code
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 border-t border-gray-700 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <p class="text-gray-400">© 2026 Komal Singh Shekhawat. All rights reserved.</p>
+                <div class="mt-4 flex justify-center space-x-6">
+                    <a href="https://www.linkedin.com/in/komal-singh-shekhawat-054853234/" class="text-gray-400 hover:text-blue-400 transition-colors">
+                        <span class="sr-only">LinkedIn</span>
+                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/komal8949" class="text-gray-400 hover:text-blue-400 transition-colors">
+                        <span class="sr-only">GitHub</span>
+                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors">
+                        <span class="sr-only">Twitter</span>
+                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // Project data for modals
+        const projectData = {
+            project1: {
+                title: "Analytics Dashboard",
+                description: "A comprehensive business intelligence platform that transforms raw data into actionable insights through interactive visualizations and real-time analytics.",
+                features: [
+                    "Real-time data processing with Apache Kafka",
+                    "Interactive dashboards with D3.js and Chart.js",
+                    "Advanced filtering and drill-down capabilities",
+                    "Automated report generation and scheduling",
+                    "Multi-tenant architecture with role-based access control"
+                ],
+                challenges: "Handling large datasets efficiently while maintaining responsive user interface. Implemented data caching and lazy loading strategies.",
+                results: "Reduced data processing time by 60% and increased user engagement by 45%. Currently used by 500+ business analysts daily."
+            },
+            project2: {
+                title: "Fintech Platform",
+                description: "Secure financial trading application with real-time market data analysis, portfolio management, and risk assessment tools.",
+                features: [
+                    "Real-time market data streaming",
+                    "Advanced charting with technical indicators",
+                    "Portfolio optimization algorithms",
+                    "Risk management and compliance monitoring",
+                    "Secure payment processing integration"
+                ],
+                challenges: "Ensuring sub-second latency for real-time data while maintaining security and compliance with financial regulations.",
+                results: "Processed over $50M in transactions with 99.9% uptime. Achieved 40% faster trade execution compared to existing solutions."
+            },
+            project3: {
+                title: "Healthcare Management System",
+                description: "Comprehensive patient management system with predictive analytics for treatment outcomes and resource optimization.",
+                features: [
+                    "Electronic health records (EHR) management",
+                    "Predictive analytics for treatment outcomes",
+                    "Resource allocation optimization",
+                    "Patient appointment scheduling system",
+                    "HIPAA-compliant security measures"
+                ],
+                challenges: "Balancing data accessibility with strict healthcare privacy requirements while providing meaningful insights.",
+                results: "Improved patient care coordination by 35% and reduced administrative overhead by 25% across 3 healthcare facilities."
+            },
+            project4: {
+                title: "E-commerce Platform",
+                description: "Full-stack e-commerce solution with advanced inventory management, payment processing, and customer analytics dashboard.",
+                features: [
+                    "Responsive product catalog with search and filtering",
+                    "Secure payment processing with multiple providers",
+                    "Inventory management and automated restocking",
+                    "Customer behavior analytics and recommendations",
+                    "Multi-vendor marketplace support"
+                ],
+                challenges: "Handling high-traffic loads during peak shopping seasons while maintaining fast response times.",
+                results: "Successfully handled 10,000+ concurrent users during Black Friday sales. Increased conversion rate by 30%."
+            },
+            project5: {
+                title: "Social Media Analytics",
+                description: "Sentiment analysis dashboard that processes social media data to provide insights on brand perception and market trends.",
+                features: [
+                    "Real-time social media data ingestion",
+                    "Natural language processing for sentiment analysis",
+                    "Interactive data visualizations",
+                    "Competitor analysis and benchmarking",
+                    "Automated reporting and alerts"
+                ],
+                challenges: "Processing unstructured text data at scale while maintaining accuracy in sentiment classification.",
+                results: "Analyzed 1M+ social media posts daily with 85% accuracy in sentiment classification. Used by 50+ marketing agencies."
+            },
+            project6: {
+                title: "Project Management Tool",
+                description: "Team collaboration platform with advanced task management, time tracking, and real-time communication features.",
+                features: [
+                    "Kanban and Scrum board implementations",
+                    "Real-time collaboration with WebSockets",
+                    "Time tracking and productivity analytics",
+                    "File sharing and version control",
+                    "Integration with popular development tools"
+                ],
+                challenges: "Ensuring real-time synchronization across multiple users while maintaining data consistency.",
+                results: "Increased team productivity by 40% and reduced project delivery times by 25% for 200+ teams."
+            }
+        };
+
+        // Filter functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+        const searchInput = document.getElementById('search-input');
+        const noResults = document.getElementById('no-results');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Update active button
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                
+                filterProjects();
+            });
+        });
+
+        searchInput.addEventListener('input', filterProjects);
+
+        function filterProjects() {
+            const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+            const searchTerm = searchInput.value.toLowerCase();
+            let visibleCount = 0;
+
+            projectCards.forEach(card => {
+                const tags = card.dataset.tags;
+                const title = card.dataset.title.toLowerCase();
+                
+                const matchesFilter = activeFilter === 'all' || tags.includes(activeFilter);
+                const matchesSearch = title.includes(searchTerm);
+                
+                if (matchesFilter && matchesSearch) {
+                    card.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Show/hide no results message
+            if (visibleCount === 0) {
+                noResults.classList.remove('hidden');
+            } else {
+                noResults.classList.add('hidden');
+            }
+        }
+
+        // Modal functionality
+        function openProjectModal(projectId) {
+            const modal = document.getElementById('project-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalContent = document.getElementById('modal-content');
+            
+            const project = projectData[projectId];
+            if (!project) return;
+            
+            modalTitle.textContent = project.title;
+            modalContent.innerHTML = `
+                <div class="mb-6">
+                    <h3 class="text-xl font-semibold text-white mb-3">Project Overview</h3>
+                    <p class="text-gray-300 leading-relaxed">${project.description}</p>
+                </div>
+                
+                <div class="mb-6">
+                    <h3 class="text-xl font-semibold text-white mb-3">Key Features</h3>
+                    <ul class="text-gray-300 space-y-2">
+                        ${project.features.map(feature => `<li>• ${feature}</li>`).join('')}
+                    </ul>
+                </div>
+                
+                <div class="mb-6">
+                    <h3 class="text-xl font-semibold text-white mb-3">Technical Challenges</h3>
+                    <p class="text-gray-300 leading-relaxed">${project.challenges}</p>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-semibold text-white mb-3">Results & Impact</h3>
+                    <p class="text-gray-300 leading-relaxed">${project.results}</p>
+                </div>
+            `;
+            
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeProjectModal() {
+            const modal = document.getElementById('project-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal on outside click
+        document.getElementById('project-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeProjectModal();
+            }
+        });
+
+        // Scroll Reveal Animation
+        function initScrollReveal() {
+            const revealElements = document.querySelectorAll('.reveal');
+            
+            const revealObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+            
+            revealElements.forEach(element => {
+                revealObserver.observe(element);
+            });
+        }
+
+        // Initialize animations when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            initScrollReveal();
+        });
+    </script>
+</body>
+</html>

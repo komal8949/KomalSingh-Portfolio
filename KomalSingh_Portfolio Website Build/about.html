@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me - Komal Singh Shekhawat</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://unpkg.com/splitting@1.0.6/dist/splitting.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/splitting@1.0.6/dist/splitting.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        body {
+            background: #1a1a1a;
+            color: #ffffff;
+        }
+        .card {
+            background: #2d2d2d;
+            border: 1px solid #404040;
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 168, 255, 0.1);
+            border-color: #00a8ff;
+        }
+        .nav-link {
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .nav-link:hover {
+            color: #00a8ff;
+        }
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #00a8ff;
+        }
+        .skill-bar {
+            background: #404040;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, #00a8ff, #00b894);
+            border-radius: 4px;
+            transition: width 2s ease;
+        }
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            background: #00a8ff;
+            border-radius: 50%;
+        }
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 1.5rem;
+            width: 2px;
+            height: calc(100% - 1rem);
+            background: #404040;
+        }
+        .timeline-item:last-child::after {
+            display: none;
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.6s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-gray-900/95 backdrop-blur-sm border-b border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <span class="text-xl font-bold text-white">Portfolio</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="index.html" class="nav-link text-gray-300 hover:text-blue-400 px-3 py-2 text-sm font-medium">Overview</a>
+                        <a href="about.html" class="nav-link active text-white hover:text-blue-400 px-3 py-2 text-sm font-medium">About Me</a>
+                        <a href="resume.html" class="nav-link text-gray-300 hover:text-blue-400 px-3 py-2 text-sm font-medium">Resume</a>
+                        <a href="projects.html" class="nav-link text-gray-300 hover:text-blue-400 px-3 py-2 text-sm font-medium">Projects</a>
+                        <a href="experience.html" class="nav-link text-gray-300 hover:text-blue-400 px-3 py-2 text-sm font-medium">Experience</a>
+                        <a href="contact.html" class="nav-link text-gray-300 hover:text-blue-400 px-3 py-2 text-sm font-medium">Contact</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-gray-800 border-t border-gray-700">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="index.html" class="block px-3 py-2 text-gray-300 hover:text-white">Overview</a>
+                <a href="about.html" class="block px-3 py-2 text-white font-medium">About Me</a>
+                <a href="resume.html" class="block px-3 py-2 text-gray-300 hover:text-white">Resume</a>
+                <a href="projects.html" class="block px-3 py-2 text-gray-300 hover:text-white">Projects</a>
+                <a href="experience.html" class="block px-3 py-2 text-gray-300 hover:text-white">Experience</a>
+                <a href="contact.html" class="block px-3 py-2 text-gray-300 hover:text-white">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 bg-gradient-to-br from-gray-900 to-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="reveal">
+                    <h1 class="text-5xl font-bold text-white mb-6">About Me</h1>
+                    <p class="text-xl text-gray-300 mb-6 leading-relaxed">
+                        I'm a passionate Full-Stack Developer and Data Analyst with over 3 years of experience 
+                        creating data-driven solutions that bridge the gap between complex information and 
+                        actionable business insights.
+                    </p>
+                    <p class="text-lg text-gray-400 mb-8">
+                        My journey in technology started with a curiosity about how data can tell stories and 
+                        drive decision-making. Today, I specialize in building powerful applications that transform 
+                        raw data into meaningful visualizations and user experiences.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="resume.html" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium text-center transition-all">
+                            View Resume
+                        </a>
+                        <a href="contact.html" class="border border-blue-400 text-blue-400 px-8 py-3 rounded-lg font-medium text-center hover:bg-blue-400 hover:text-white transition-all">
+                            Get In Touch
+                        </a>
+                    </div>
+                </div>
+                <div class="reveal">
+                    <div class="relative">
+                        <img src="./resources/profile-photo.jpg" alt="Komal Singh Shekhawat" class="rounded-2xl shadow-2xl w-full max-w-md mx-auto">
+                        <div class="absolute -bottom-6 -right-6 bg-gradient-to-r from-blue-500 to-green-500 text-white px-6 py-3 rounded-lg font-medium">
+                            3+ Years Experience
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Personal Story -->
+    <section class="py-20 bg-gray-900">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl font-bold text-white mb-4">My Story</h2>
+                <p class="text-xl text-gray-400">From curiosity to expertise</p>
+            </div>
+            
+            <div class="space-y-12">
+                <div class="card p-8 rounded-xl reveal">
+                    <h3 class="text-2xl font-semibold text-white mb-4">The Beginning</h3>
+                    <p class="text-gray-300 leading-relaxed mb-4">
+                        My fascination with data began during my computer science studies when I realized that 
+                        behind every number lies a story waiting to be told. What started as academic curiosity 
+                        evolved into a professional passion for transforming complex datasets into clear, 
+                        actionable insights.
+                    </p>
+                    <p class="text-gray-300 leading-relaxed">
+                        Early in my career, I worked on small-scale data projects, learning the fundamentals 
+                        of database design, statistical analysis, and visualization techniques. These experiences 
+                        laid the foundation for my expertise in full-stack development and data analytics.
+                    </p>
+                </div>
+                
+                <div class="card p-8 rounded-xl reveal">
+                    <h3 class="text-2xl font-semibold text-white mb-4">Professional Growth</h3>
+                    <p class="text-gray-300 leading-relaxed mb-4">
+                        Over the past three years, I've had the privilege of working with diverse teams across 
+                        multiple industries, from healthcare to finance. Each project has taught me something 
+                        new about the power of data visualization and the importance of user-centered design.
+                    </p>
+                    <p class="text-gray-300 leading-relaxed">
+                        My approach combines technical expertise with creative problem-solving, ensuring that 
+                        every solution not only meets technical requirements but also delivers exceptional 
+                        user experiences that drive business value.
+                    </p>
+                </div>
+                
+                <div class="card p-8 rounded-xl reveal">
+                    <h3 class="text-2xl font-semibold text-white mb-4">Looking Forward</h3>
+                    <p class="text-gray-300 leading-relaxed mb-4">
+                        Today, I'm excited about the intersection of artificial intelligence and data 
+                        visualization. I'm constantly exploring new technologies and methodologies that 
+                        can help organizations make better decisions through intelligent data presentation.
+                    </p>
+                    <p class="text-gray-300 leading-relaxed">
+                        When I'm not coding or analyzing data, you'll find me contributing to open-source 
+                        projects, writing technical articles, or mentoring aspiring developers in the 
+                        data analytics space.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Matrix -->
+    <section class="py-20 bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl font-bold text-white mb-4">Skills & Expertise</h2>
+                <p class="text-xl text-gray-400">Technical proficiencies developed over the years</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="reveal">
+                    <h3 class="text-2xl font-semibold text-white mb-8">Technical Skills</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-white font-medium">JavaScript/TypeScript</span>
+                                <span class="text-blue-400">90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="90"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-white font-medium">Python</span>
+                                <span class="text-blue-400">85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-white font-medium">React/Vue.js</span>
+                                <span class="text-blue-400">88%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="88"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-white font-medium">Node.js/Django</span>
+                                <span class="text-blue-400">82%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="82"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-white font-medium">SQL/NoSQL</span>
+                                <span class="text-blue-400">80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-white font-medium">Data Visualization</span>
+                                <span class="text-blue-400">92%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="92"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="reveal">
+                    <h3 class="text-2xl font-semibold text-white mb-8">Professional Skills</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-white font-medium">Project Management</span>
+                                <span class="text-green-400">85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-white font-medium">Team Leadership</span>
+                                <span class="text-green-400">80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-white font-medium">Problem Solving</span>
+                                <span class="text-green-400">95%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="95"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-white font-medium">Communication</span>
+                                <span class="text-green-400">88%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="88"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-white font-medium">Agile/Scrum</span>
+                                <span class="text-green-400">90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="90"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-white font-medium">Technical Writing</span>
+                                <span class="text-green-400">75%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="75"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Personal Interests -->
+    <section class="py-20 bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl font-bold text-white mb-4">Beyond Code</h2>
+                <p class="text-xl text-gray-400">What drives me outside of work</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card p-6 rounded-xl text-center reveal">
+                    <div class="text-5xl mb-4">📚</div>
+                    <h3 class="text-xl font-semibold text-white mb-3">Continuous Learning</h3>
+                    <p class="text-gray-400">
+                        Always exploring new technologies, reading tech blogs, and taking online courses 
+                        to stay current with industry trends.
+                    </p>
+                </div>
+                
+                <div class="card p-6 rounded-xl text-center reveal">
+                    <div class="text-5xl mb-4">🎯</div>
+                    <h3 class="text-xl font-semibold text-white mb-3">Open Source</h3>
+                    <p class="text-gray-400">
+                        Contributing to open-source projects and maintaining several data visualization 
+                        libraries for the community.
+                    </p>
+                </div>
+                
+                <div class="card p-6 rounded-xl text-center reveal">
+                    <div class="text-5xl mb-4">🏃</div>
+                    <h3 class="text-xl font-semibold text-white mb-3">Fitness & Health</h3>
+                    <p class="text-gray-400">
+                        Running, cycling, and maintaining an active lifestyle to keep both mind and body 
+                        in optimal condition for creative problem-solving.
+                    </p>
+                </div>
+                
+                <div class="card p-6 rounded-xl text-center reveal">
+                    <div class="text-5xl mb-4">🌍</div>
+                    <h3 class="text-xl font-semibold text-white mb-3">Travel & Culture</h3>
+                    <p class="text-gray-400">
+                        Exploring different cultures and perspectives, which enriches my approach to 
+                        user experience and global product development.
+                    </p>
+                </div>
+                
+                <div class="card p-6 rounded-xl text-center reveal">
+                    <div class="text-5xl mb-4">🎵</div>
+                    <h3 class="text-xl font-semibold text-white mb-3">Music & Creativity</h3>
+                    <p class="text-gray-400">
+                        Playing guitar and composing music, which helps me think creatively and approach 
+                        technical challenges from different angles.
+                    </p>
+                </div>
+                
+                <div class="card p-6 rounded-xl text-center reveal">
+                    <div class="text-5xl mb-4">🌱</div>
+                    <h3 class="text-xl font-semibold text-white mb-3">Sustainability</h3>
+                    <p class="text-gray-400">
+                        Passionate about sustainable technology and green computing practices that reduce 
+                        environmental impact.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values & Philosophy -->
+    <section class="py-20 bg-gray-900">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl font-bold text-white mb-4">My Philosophy</h2>
+                <p class="text-xl text-gray-400">Core principles that guide my work</p>
+            </div>
+            
+            <div class="card p-8 rounded-xl reveal">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold text-white mb-4">📊 Data-Driven Decisions</h3>
+                        <p class="text-gray-400 mb-6">
+                            Every solution should be backed by solid data analysis and user research. 
+                            I believe in measuring what matters and iterating based on evidence.
+                        </p>
+                        
+                        <h3 class="text-xl font-semibold text-white mb-4">🎨 User-Centered Design</h3>
+                        <p class="text-gray-400">
+                            Technology should serve people, not the other way around. I focus on creating 
+                            intuitive interfaces that make complex data accessible to everyone.
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-semibold text-white mb-4">🚀 Continuous Innovation</h3>
+                        <p class="text-gray-400 mb-6">
+                            The tech landscape evolves rapidly, and I believe in staying ahead through 
+                            continuous learning and experimentation with new tools and methodologies.
+                        </p>
+                        
+                        <h3 class="text-xl font-semibold text-white mb-4">🤝 Collaborative Approach</h3>
+                        <p class="text-gray-400">
+                            The best solutions come from diverse perspectives. I value teamwork and 
+                            believe in the power of cross-functional collaboration.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 border-t border-gray-700 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <p class="text-gray-400">© 2026 Komal Singh Shekhawat. All rights reserved.</p>
+                <div class="mt-4 flex justify-center space-x-6">
+                    <a href="https://www.linkedin.com/in/komal-singh-shekhawat-054853234/" class="text-gray-400 hover:text-blue-400 transition-colors">
+                        <span class="sr-only">LinkedIn</span>
+                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/komal8949" class="text-gray-400 hover:text-blue-400 transition-colors">
+                        <span class="sr-only">GitHub</span>
+                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors">
+                        <span class="sr-only">Twitter</span>
+                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // Scroll Reveal Animation
+        function initScrollReveal() {
+            const revealElements = document.querySelectorAll('.reveal');
+            
+            const revealObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+            
+            revealElements.forEach(element => {
+                revealObserver.observe(element);
+            });
+        }
+
+        // Animate skill bars
+        function animateSkillBars() {
+            const skillBars = document.querySelectorAll('.skill-progress');
+            
+            const skillObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const width = entry.target.dataset.width;
+                        entry.target.style.width = width + '%';
+                        skillObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            skillBars.forEach(bar => {
+                skillObserver.observe(bar);
+            });
+        }
+
+        // Initialize animations when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            initScrollReveal();
+            animateSkillBars();
+        });
+    </script>
+</body>
+</html>

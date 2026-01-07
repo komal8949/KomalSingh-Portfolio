@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume - Komal Singh Shekhawat</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        body {
+            background: #1a1a1a;
+            color: #ffffff;
+        }
+        .card {
+            background: #2d2d2d;
+            border: 1px solid #404040;
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 168, 255, 0.1);
+            border-color: #00a8ff;
+        }
+        .nav-link {
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .nav-link:hover {
+            color: #00a8ff;
+        }
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #00a8ff;
+        }
+        .btn-download {
+            background: linear-gradient(135deg, #00a8ff 0%, #00b894 100%);
+            transition: all 0.3s ease;
+        }
+        .btn-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 168, 255, 0.3);
+        }
+        .certification-badge {
+            background: linear-gradient(135deg, #00a8ff 0%, #00b894 100%);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            display: inline-block;
+            margin: 0.25rem;
+        }
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 2rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            background: #00a8ff;
+            border-radius: 50%;
+        }
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 1.5rem;
+            width: 2px;
+            height: calc(100% + 1rem);
+            background: #404040;
+        }
+        .timeline-item:last-child::after {
+            display: none;
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.6s ease;
+        }
+        .download-progress {
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, #00a8ff, #00b894);
+            border-radius: 2px;
+            transition: width 3s ease;
+        }
+        .skill-meter {
+            background: #404040;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, #00a8ff, #00b894);
+            border-radius: 4px;
+            transition: width 2s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-gray-900/95 backdrop-blur-sm border-b border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <span class="text-xl font-bold text-white">Portfolio</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="index.html" class="nav-link text-gray-300 hover:text-blue-400 px-3 py-2 text-sm font-medium">Overview</a>
+                        <a href="about.html" class="nav-link text-gray-300 hover:text-blue-400 px-3 py-2 text-sm font-medium">About Me</a>
+                        <a href="resume.html" class="nav-link active text-white hover:text-blue-400 px-3 py-2 text-sm font-medium">Resume/Education</a>
+                        <a href="projects.html" class="nav-link text-gray-300 hover:text-blue-400 px-3 py-2 text-sm font-medium">Projects</a>
+                        <a href="experience.html" class="nav-link text-gray-300 hover:text-blue-400 px-3 py-2 text-sm font-medium">Experience</a>
+                        <a href="contact.html" class="nav-link text-gray-300 hover:text-blue-400 px-3 py-2 text-sm font-medium">Contact</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-gray-800 border-t border-gray-700">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="index.html" class="block px-3 py-2 text-gray-300 hover:text-white">Overview</a>
+                <a href="about.html" class="block px-3 py-2 text-gray-300 hover:text-white">About Me</a>
+                <a href="resume.html" class="block px-3 py-2 text-white font-medium">Resume/Education</a>
+                <a href="projects.html" class="block px-3 py-2 text-gray-300 hover:text-white">Projects</a>
+                <a href="experience.html" class="block px-3 py-2 text-gray-300 hover:text-white">Experience</a>
+                <a href="contact.html" class="block px-3 py-2 text-gray-300 hover:text-white">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 bg-gradient-to-br from-gray-900 to-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center reveal">
+                <h1 class="text-5xl font-bold text-white mb-6">Professional Resume</h1>
+                <p class="text-xl text-gray-400 mb-8">Data-driven professional with 3+ years of experience</p>
+                
+                <!-- Download Button -->
+                <div class="flex justify-center mb-8">
+                    <button id="download-btn" class="btn-download px-8 py-4 rounded-lg text-white font-medium text-lg flex items-center gap-3">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                        Download Resume (PDF)
+                    </button>
+                </div>
+                
+                <!-- Download Progress Bar -->
+                <div class="max-w-md mx-auto mb-8">
+                    <div id="download-progress-container" class="bg-gray-700 h-2 rounded-full overflow-hidden hidden">
+                        <div id="download-progress" class="download-progress"></div>
+                    </div>
+                    <p id="download-status" class="text-sm text-gray-400 mt-2 hidden">Preparing download...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Professional Summary -->
+    <section class="py-20 bg-gray-900">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="card p-8 rounded-xl reveal">
+                <h2 class="text-3xl font-bold text-white mb-6">Professional Summary</h2>
+                <p class="text-lg text-gray-300 leading-relaxed mb-6">
+                    Results-driven Full-Stack Developer and Data Analyst with 5+ years of experience creating 
+                    data-driven applications and business intelligence solutions. Proven track record of 
+                    transforming complex datasets into actionable insights through innovative visualization 
+                    techniques and user-centered design principles.
+                </p>
+                <p class="text-lg text-gray-300 leading-relaxed">
+                    Expertise in modern web technologies, data analytics platforms, and cloud infrastructure. 
+                    Passionate about leveraging technology to solve real-world problems and drive business growth. 
+                    Strong background in agile development methodologies and cross-functional team collaboration.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Matrix -->
+    <section class="py-20 bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl font-bold text-white mb-4">Technical Skills</h2>
+                <p class="text-xl text-gray-400">Comprehensive skill set across development and analytics</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Programming Languages -->
+                <div class="card p-8 rounded-xl reveal">
+                    <h3 class="text-2xl font-semibold text-white mb-8">Programming Languages</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-white font-medium">JavaScript</span>
+                                <span class="text-blue-400">90%</span>
+                            </div>
+                            <div class="skill-meter">
+                                <div class="skill-progress" data-width="90"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-white font-medium">Python</span>
+                                <span class="text-blue-400">85%</span>
+                            </div>
+                            <div class="skill-meter">
+                                <div class="skill-progress" data-width="85"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-white font-medium">SQL</span>
+                                <span class="text-blue-400">88%</span>
+                            </div>
+                            <div class="skill-meter">
+                                <div class="skill-progress" data-width="88"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-white font-medium">HTML/CSS</span>
+                                <span class="text-blue-400">92%</span>
+                            </div>
+                            <div class="skill-meter">
+                                <div class="skill-progress" data-width="92"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-white font-medium">Java</span>
+                                <span class="text-blue-400">50%</span>
+                            </div>
+                            <div class="skill-meter">
+                                <div class="skill-progress" data-width="75"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Frameworks & Libraries -->
+                <div class="card p-8 rounded-xl reveal">
+                    <h3 class="text-2xl font-semibold text-white mb-8">Frameworks & Libraries</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-white font-medium">React/Vue.js</span>
+                                <span class="text-green-400">88%</span>
+                            </div>
+                            <div class="skill-meter">
+                                <div class="skill-progress" data-width="88"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-white font-medium">Node.js/Express</span>
+                                <span class="text-green-400">85%</span>
+                            </div>
+                            <div class="skill-meter">
+                                <div class="skill-progress" data-width="85"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-white font-medium">Django/Flask</span>
+                                <span class="text-green-400">80%</span>
+                            </div>
+                            <div class="skill-meter">
+                                <div class="skill-progress" data-width="80"></div>
+                            </div>
+                        </div>
+                        
+                        
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-white font-medium">Tailwind CSS</span>
+                                <span class="text-green-400">70%</span>
+                            </div>
+                            <div class="skill-meter">
+                                <div class="skill-progress" data-width="90"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Databases & Tools -->
+                <div class="card p-8 rounded-xl reveal">
+                    <h3 class="text-2xl font-semibold text-white mb-8">Databases & Tools</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-white font-medium">PostgreSQL</span>
+                                <span class="text-purple-400">85%</span>
+                            </div>
+                            <div class="skill-meter">
+                                <div class="skill-progress" data-width="85"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-white font-medium">MongoDB</span>
+                                <span class="text-purple-400">80%</span>
+                            </div>
+                            <div class="skill-meter">
+                                <div class="skill-progress" data-width="80"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-white font-medium">MYSql</span>
+                                <span class="text-purple-400">75%</span>
+                            </div>
+                            <div class="skill-meter">
+                                <div class="skill-progress" data-width="75"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-white font-medium">Docker</span>
+                                <span class="text-purple-400">82%</span>
+                            </div>
+                            <div class="skill-meter">
+                                <div class="skill-progress" data-width="82"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-white font-medium">Git/GitHub</span>
+                                <span class="text-purple-400">90%</span>
+                            </div>
+                            <div class="skill-meter">
+                                <div class="skill-progress" data-width="90"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Analytics & Cloud -->
+                <div class="card p-8 rounded-xl reveal">
+                    <h3 class="text-2xl font-semibold text-white mb-8">Analytics & Cloud</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-white font-medium">Power BI</span>
+                                <span class="text-orange-400">88%</span>
+                            </div>
+                            <div class="skill-meter">
+                                <div class="skill-progress" data-width="88"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-white font-medium">Tableau</span>
+                                <span class="text-orange-400">50%</span>
+                            </div>
+                            <div class="skill-meter">
+                                <div class="skill-progress" data-width="82"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-white font-medium">AWS</span>
+                                <span class="text-orange-400">80%</span>
+                            </div>
+                            <div class="skill-meter">
+                                <div class="skill-progress" data-width="80"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-white font-medium">Azure</span>
+                                <span class="text-orange-400">75%</span>
+                            </div>
+                            <div class="skill-meter">
+                                <div class="skill-progress" data-width="75"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-white font-medium">Pandas/NumPy</span>
+                                <span class="text-orange-400">90%</span>
+                            </div>
+                            <div class="skill-meter">
+                                <div class="skill-progress" data-width="90"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <!-- Professional Experience -->
+<section class="py-20 bg-gray-900">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 reveal">
+            <h2 class="text-4xl font-bold text-white mb-4">Professional Experience</h2>
+            <p class="text-xl text-gray-400">Internships, leadership roles, and practical experience</p>
+        </div>
+        
+        <div class="card p-8 rounded-xl reveal">
+            <div class="space-y-8">
+
+                <!-- ML Intern -->
+                <div class="timeline-item">
+                    <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
+                        <div>
+                            <h3 class="text-xl font-semibold text-white">Machine Learning Intern</h3>
+                            <p class="text-blue-400 font-medium">Suvidha Foundation</p>
+                            <p class="text-gray-400 text-sm">Remote • India</p>
+                        </div>
+                        <span class="text-gray-400">Internship</span>
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        Worked on real-world machine learning and data analysis tasks focused on social impact 
+                        projects. Applied data preprocessing, model building, and evaluation techniques.
+                    </p>
+                    <ul class="text-gray-400 space-y-2">
+                        <li>• Performed data cleaning, preprocessing, and exploratory data analysis (EDA)</li>
+                        <li>• Built and evaluated machine learning models using Python</li>
+                        <li>• Worked with libraries such as Pandas, NumPy, Matplotlib, and Scikit-learn</li>
+                        <li>• Collaborated remotely with mentors and team members on project deliverables</li>
+                    </ul>
+                </div>
+
+                <!-- Club Coordinator -->
+                <div class="timeline-item">
+                    <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
+                        <div>
+                            <h3 class="text-xl font-semibold text-white">Data Science & AIML Club Coordinator</h3>
+                            <p class="text-blue-400 font-medium">College Technical Club</p>
+                        </div>
+                        <span class="text-gray-400">Academic Role</span>
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        Led and coordinated activities for the Data Science & AIML club, promoting hands-on 
+                        learning, peer collaboration, and technical skill development.
+                    </p>
+                    <ul class="text-gray-400 space-y-2">
+                        <li>• Organized workshops and sessions on Python, Machine Learning, and Data Analytics</li>
+                        <li>• Guided students on mini-projects and learning roadmaps</li>
+                        <li>• Encouraged practical implementation through datasets and real-world problems</li>
+                        <li>• Strengthened leadership, communication, and mentoring skills</li>
+                    </ul>
+                </div>
+
+                <!-- Academic / Project Experience -->
+                <div class="timeline-item">
+                    <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
+                        <div>
+                            <h3 class="text-xl font-semibold text-white">Academic & Project Experience</h3>
+                            <p class="text-blue-400 font-medium">Data Science & AIML</p>
+                        </div>
+                        <span class="text-gray-400">Ongoing</span>
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        Hands-on experience through academic and personal projects focused on data analysis, 
+                        visualization, and machine learning applications.
+                    </p>
+                    <ul class="text-gray-400 space-y-2">
+                        <li>• Built data analytics dashboards using Power BI</li>
+                        <li>• Worked on ML projects including classification and prediction models</li>
+                        <li>• Applied Python-based data pipelines for analysis and visualization</li>
+                        <li>• Experience with Jupyter Notebook, Git, and basic cloud tools</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Education & Certifications -->
+    <section class="py-20 bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl font-bold text-white mb-4">Education & Certifications</h2>
+                <p class="text-xl text-gray-400">Academic background and professional credentials</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Education -->
+                <div class="card p-8 rounded-xl reveal">
+                    <h3 class="text-2xl font-semibold text-white mb-6">Education</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="text-xl font-medium text-white">Bachelor of Technology in Computer Scinece Engineering</h4>
+                            <p class="text-blue-400 mb-2">Dev Bhoomi Uttarakhand University, Dehradun India</p>
+                            <p class="text-gray-400 mb-2">2021 - 2025</p>
+                            <p class="text-gray-300">Specialization in Artificial Intelligence and Machine Learning</p>
+                        </div>
+                        
+                        <div>
+                            <h4 class="text-xl font-medium text-white">High School</h4>
+                            <p class="text-blue-400 mb-2">Kendriya Vidyalay FRI, Dehradun India</p>
+                            <p class="text-gray-400 mb-2">2021</p>
+                            <p class="text-gray-300">Physics Chemistry Mathematics</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Certifications -->
+                <div class="card p-8 rounded-xl reveal">
+                    <h3 class="text-2xl font-semibold text-white mb-6">Certifications</h3>
+                    <div class="space-y-4">
+                        <div class="certification-badge">
+                            AWS Certified Cloud Practitioner
+                        </div>
+                        <div class="certification-badge">
+                            Microsoft Power BI Data Analyst
+                        </div>
+                        <div class="certification-badge">
+                            Google Cloud Database Engineer
+                        </div>
+                        <div class="certification-badge">
+                            Information Technology Specialist
+                        </div>
+                        <div class="certification-badge">
+                            SQl For Data Analysis(HackerRank)
+                        </div>
+                        <div class="certification-badge">
+                            Machine Learning(LinkedIn)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Achievements -->
+<section class="py-20 bg-gray-900">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 reveal">
+            <h2 class="text-4xl font-bold text-white mb-4">Key Achievements</h2>
+            <p class="text-xl text-gray-400">Academic, sports, and leadership accomplishments</p>
+        </div>
+        
+        <div class="card p-8 rounded-xl reveal">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                <!-- Awards & Recognition -->
+                <div>
+                    <h3 class="text-xl font-semibold text-white mb-4">🏅 Awards & Recognition</h3>
+                    <ul class="text-gray-300 space-y-3">
+                        <li>• First Position – Zonal Level Volleyball Competition (KV FRI, Dehradun)</li>
+                        <li>• Second Position – 400m Running Event (Inter-school Athletics)</li>
+                        <li>• Active Sports Participant – Kendriya Vidyalaya FRI, Dehradun</li>
+                        <li>• Represented College in Cricket Team (Change Yourself Initiative)</li>
+                    </ul>
+                </div>
+                
+                <!-- Leadership & Participation -->
+                <div>
+                    <h3 class="text-xl font-semibold text-white mb-4">🎯 Leadership & Participation</h3>
+                    <ul class="text-gray-300 space-y-3">
+                        <li>• Core Member – College Cricket Team</li>
+                        <li>• Demonstrated teamwork, discipline, and leadership through competitive sports</li>
+                        <li>• Balanced academics with consistent participation in athletics</li>
+                        <li>• Developed resilience, time management, and competitive mindset</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 border-t border-gray-700 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <p class="text-gray-400">© 2026 Komal Singh Shekhawat. All rights reserved.</p>
+                <div class="mt-4 flex justify-center space-x-6">
+                    <a href="https://www.linkedin.com/in/komal-singh-shekhawat-054853234/" class="text-gray-400 hover:text-blue-400 transition-colors">
+                        <span class="sr-only">LinkedIn</span>
+                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/komal8949" class="text-gray-400 hover:text-blue-400 transition-colors">
+                        <span class="sr-only">GitHub</span>
+                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors">
+                        <span class="sr-only">Twitter</span>
+                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // Download Resume Functionality
+        document.getElementById('download-btn').addEventListener('click', function() {
+            const progressContainer = document.getElementById('download-progress-container');
+            const progressBar = document.getElementById('download-progress');
+            const statusText = document.getElementById('download-status');
+            
+            // Show progress elements
+            progressContainer.classList.remove('hidden');
+            statusText.classList.remove('hidden');
+            
+            // Animate progress bar
+            setTimeout(() => {
+                progressBar.style.width = '100%';
+                statusText.textContent = 'Downloading resume.pdf...';
+            }, 100);
+            
+            // Simulate download completion
+            setTimeout(() => {
+                // Create a temporary link to trigger download
+                const link = document.createElement('a');
+                link.href = './resources/resume.pdf';
+                link.download = 'John_Doe_Resume.pdf';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                // Update status
+                statusText.textContent = 'Download completed!';
+                
+                // Hide progress after a delay
+                setTimeout(() => {
+                    progressContainer.classList.add('hidden');
+                    statusText.classList.add('hidden');
+                    progressBar.style.width = '0%';
+                }, 2000);
+            }, 3000);
+        });
+
+        // Scroll Reveal Animation
+        function initScrollReveal() {
+            const revealElements = document.querySelectorAll('.reveal');
+            
+            const revealObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+            
+            revealElements.forEach(element => {
+                revealObserver.observe(element);
+            });
+        }
+
+        // Animate skill meters
+        function animateSkillMeters() {
+            const skillMeters = document.querySelectorAll('.skill-progress');
+            
+            const skillObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const width = entry.target.dataset.width;
+                        entry.target.style.width = width + '%';
+                        skillObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            skillMeters.forEach(meter => {
+                skillObserver.observe(meter);
+            });
+        }
+
+        // Initialize animations when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            initScrollReveal();
+            animateSkillMeters();
+        });
+    </script>
+</body>
+</html>

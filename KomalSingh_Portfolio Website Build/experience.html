@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experience - Komal Singh Shekhawat</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        body {
+            background: #1a1a1a;
+            color: #ffffff;
+        }
+        .card {
+            background: #2d2d2d;
+            border: 1px solid #404040;
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 168, 255, 0.1);
+            border-color: #00a8ff;
+        }
+        .nav-link {
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .nav-link:hover {
+            color: #00a8ff;
+        }
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #00a8ff;
+        }
+        .timeline-item {
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 3rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 16px;
+            height: 16px;
+            background: #00a8ff;
+            border-radius: 50%;
+            z-index: 2;
+        }
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 2rem;
+            width: 2px;
+            height: calc(100% + 2rem);
+            background: linear-gradient(to bottom, #00a8ff, #404040);
+        }
+        .timeline-item:last-child::after {
+            display: none;
+        }
+        .company-logo {
+            width: 60px;
+            height: 60px;
+            background: #2d2d2d;
+            border: 2px solid #404040;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #00a8ff;
+            position: absolute;
+            left: -1.5rem;
+            top: 0;
+        }
+        .achievement-counter {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #00a8ff 0%, #00b894 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .skill-badge {
+            background: rgba(0, 168, 255, 0.2);
+            color: #00a8ff;
+            border: 1px solid rgba(0, 168, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        .skill-badge:hover {
+            background: rgba(0, 168, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.6s ease;
+        }
+        .expandable-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .expandable-content.expanded {
+            max-height: 500px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-gray-900/95 backdrop-blur-sm border-b border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <span class="text-xl font-bold text-white">Portfolio</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="index.html" class="nav-link text-gray-300 hover:text-blue-400 px-3 py-2 text-sm font-medium">Overview</a>
+                        <a href="about.html" class="nav-link text-gray-300 hover:text-blue-400 px-3 py-2 text-sm font-medium">About Me</a>
+                        <a href="resume.html" class="nav-link text-gray-300 hover:text-blue-400 px-3 py-2 text-sm font-medium">Resume</a>
+                        <a href="projects.html" class="nav-link text-gray-300 hover:text-blue-400 px-3 py-2 text-sm font-medium">Projects</a>
+                        <a href="experience.html" class="nav-link active text-white hover:text-blue-400 px-3 py-2 text-sm font-medium">Experience</a>
+                        <a href="contact.html" class="nav-link text-gray-300 hover:text-blue-400 px-3 py-2 text-sm font-medium">Contact</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-gray-800 border-t border-gray-700">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="index.html" class="block px-3 py-2 text-gray-300 hover:text-white">Overview</a>
+                <a href="about.html" class="block px-3 py-2 text-gray-300 hover:text-white">About Me</a>
+                <a href="resume.html" class="block px-3 py-2 text-gray-300 hover:text-white">Resume</a>
+                <a href="projects.html" class="block px-3 py-2 text-gray-300 hover:text-white">Projects</a>
+                <a href="experience.html" class="block px-3 py-2 text-white font-medium">Experience</a>
+                <a href="contact.html" class="block px-3 py-2 text-gray-300 hover:text-white">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 bg-gradient-to-br from-gray-900 to-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center reveal">
+                <h1 class="text-5xl font-bold text-white mb-6">Professional Experience</h1>
+                <p class="text-xl text-gray-400 mb-8">3+ years of transforming data into business value</p>
+                
+                <!-- Career Stats -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mt-12">
+                    <div class="text-center">
+                        <div class="achievement-counter" data-target="3">0</div>
+                        <p class="text-gray-400">Companies</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="achievement-counter" data-target="50">0</div>
+                        <p class="text-gray-400">Projects</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="achievement-counter" data-target="25">0</div>
+                        <p class="text-gray-400">Technologies</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="achievement-counter" data-target="3">0</div>
+                        <p class="text-gray-400">Years</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- Career Timeline -->
+<section class="py-20 bg-gray-900">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 reveal">
+            <h2 class="text-4xl font-bold text-white mb-4">Career Timeline</h2>
+            <p class="text-xl text-gray-400">Professional journey and growth</p>
+        </div>
+        
+        <div class="relative">
+
+            <!-- Machine Learning Intern -->
+            <div class="timeline-item reveal">
+                <div class="company-logo">
+                    <img src="./resources/company-1.jpg" alt="Suvidha Foundation" class="w-8 h-8 rounded">
+                </div>
+                <div class="card p-6 rounded-xl">
+                    <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
+                        <div>
+                            <h3 class="text-2xl font-bold text-white">Machine Learning Intern</h3>
+                            <p class="text-blue-400 text-lg font-medium">Suvidha Foundation</p>
+                            <p class="text-gray-400">Remote • India</p>
+                        </div>
+                        <div class="text-right">
+                            <span class="bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-sm font-medium">Current</span>
+                            <p class="text-gray-400 mt-2">Aug 2025 - Sept 2025</p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        Working on real-world machine learning problems focused on social impact. 
+                        Contributing to data preprocessing, model development, and performance evaluation 
+                        for projects supporting non-profit initiatives.
+                    </p>
+                    
+                    <div class="mb-6">
+                        <h4 class="text-lg font-semibold text-white mb-3">Key Responsibilities</h4>
+                        <ul class="text-gray-300 space-y-2">
+                            <li>• Collect, clean, and preprocess structured and unstructured datasets</li>
+                            <li>• Build and evaluate ML models using Python and Scikit-learn</li>
+                            <li>• Perform exploratory data analysis (EDA) to extract insights</li>
+                            <li>• Collaborate remotely with cross-functional teams</li>
+                            <li>• Document findings and model performance metrics</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-badge px-3 py-1 rounded-full text-sm">Python</span>
+                        <span class="skill-badge px-3 py-1 rounded-full text-sm">Machine Learning</span>
+                        <span class="skill-badge px-3 py-1 rounded-full text-sm">Pandas</span>
+                        <span class="skill-badge px-3 py-1 rounded-full text-sm">Scikit-learn</span>
+                        <span class="skill-badge px-3 py-1 rounded-full text-sm">EDA</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data Science & AIML Club Coordinator -->
+            <div class="timeline-item reveal">
+                <div class="company-logo">
+                    <img src="./resources/company-2.jpg" alt="AIML Club" class="w-8 h-8 rounded">
+                </div>
+                <div class="card p-6 rounded-xl">
+                    <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
+                        <div>
+                            <h3 class="text-2xl font-bold text-white">Data Science & AIML Club Coordinator</h3>
+                            <p class="text-blue-400 text-lg font-medium">College Technical Club</p>
+                            <p class="text-gray-400">India • On-campus</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-gray-400 mt-2">Dec 2022 - Apr 2025</p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        Led and coordinated data science and AI/ML club activities, fostering a collaborative 
+                        learning environment through workshops, projects, and peer mentoring.
+                    </p>
+                    
+                    <div class="mb-6">
+                        <h4 class="text-lg font-semibold text-white mb-3">Key Responsibilities</h4>
+                        <ul class="text-gray-300 space-y-2">
+                            <li>• Organized workshops on Python, ML, and data analytics</li>
+                            <li>• Guided students on real-world data science projects</li>
+                            <li>• Coordinated hackathons, seminars, and technical events</li>
+                            <li>• Mentored juniors in ML fundamentals and project workflows</li>
+                            <li>• Collaborated with faculty and industry speakers</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h4 class="text-lg font-semibold text-white mb-3">Major Achievements</h4>
+                        <ul class="text-gray-300 space-y-2">
+                            <li>• Successfully conducted multiple hands-on ML workshops</li>
+                            <li>• Increased club participation and engagement significantly</li>
+                            <li>• Helped members build strong project portfolios</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-badge px-3 py-1 rounded-full text-sm">Leadership</span>
+                        <span class="skill-badge px-3 py-1 rounded-full text-sm">Machine Learning</span>
+                        <span class="skill-badge px-3 py-1 rounded-full text-sm">Python</span>
+                        <span class="skill-badge px-3 py-1 rounded-full text-sm">Data Science</span>
+                        <span class="skill-badge px-3 py-1 rounded-full text-sm">Public Speaking</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+    <!-- Skills Progression Chart -->
+    <section class="py-20 bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl font-bold text-white mb-4">Skills Evolution</h2>
+                <p class="text-xl text-gray-400">Technical growth over the years</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="card p-8 rounded-xl reveal">
+                    <h3 class="text-2xl font-semibold text-white mb-6">Technology Proficiency Timeline</h3>
+                    <div id="skills-timeline-chart" style="height: 400px;"></div>
+                </div>
+                
+                <div class="card p-8 rounded-xl reveal">
+                    <h3 class="text-2xl font-semibold text-white mb-6">Skills by Category</h3>
+                    <div id="skills-category-chart" style="height: 400px;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Professional Development -->
+    <section class="py-20 bg-gray-900">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl font-bold text-white mb-4">Continuous Learning</h2>
+                <p class="text-xl text-gray-400">Professional development and certifications</p>
+            </div>
+            
+            <div class="space-y-8">
+                <div class="card p-8 rounded-xl reveal">
+                    <h3 class="text-2xl font-semibold text-white mb-6">Certifications & Training</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="text-lg font-medium text-white mb-2">AWS Certified Cloud Practitioner</h4>
+                            <p class="text-gray-400 mb-2">Amazon Web Services • 2024</p>
+                            <p class="text-gray-300 text-sm">Professional certification in cloud architecture and AWS services</p>
+                        </div>
+                        
+                        <div>
+                            <h4 class="text-lg font-medium text-white mb-2">Microsoft Power BI Data Analyst</h4>
+                            <p class="text-gray-400 mb-2">Microsoft • 2025</p>
+                            <p class="text-gray-300 text-sm">Advanced certification in business intelligence and data visualization</p>
+                        </div>
+                        
+                        <div>
+                            <h4 class="text-lg font-medium text-white mb-2">Google Cloud Database Engineer</h4>
+                            <p class="text-gray-400 mb-2">Google • 2025</p>
+                            <p class="text-gray-300 text-sm">Comprehensive program covering cloud platform and techniques</p>
+                        </div>
+                        
+                        <div>
+                            <h4 class="text-lg font-medium text-white mb-2">Information Technology Specialist</h4>
+                            <p class="text-gray-400 mb-2">Certiport • 2023</p>
+                            <p class="text-gray-300 text-sm">Information Technology fundamentals and team leadership certification</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card p-8 rounded-xl reveal">
+                    <h3 class="text-2xl font-semibold text-white mb-6">Workshops & Knowledge Sharing</h3>
+                    <div class="space-y-4">
+
+                        <div class="flex justify-between items-center py-3 border-b border-gray-700">
+                            <div>
+                                <h4 class="text-lg font-medium text-white">Introduction to Machine Learning</h4>
+                                <p class="text-gray-400">Data Science & AIML Club • College Campus</p>
+                            </div>
+                            <span class="text-blue-400">2024</span>
+                        </div>
+
+                    <div class="flex justify-between items-center py-3 border-b border-gray-700">
+                        <div>
+                            <h4 class="text-lg font-medium text-white">Hands-on Data Analysis with Python</h4>
+                            <p class="text-gray-400">Student Workshop • AIML Club</p>
+                        </div>
+                        <span class="text-blue-400">2024</span>
+                    </div>
+
+                        <div class="flex justify-between items-center py-3">
+                            <div>
+                                <h4 class="text-lg font-medium text-white">Power BI Dashboard Development</h4>
+                                <p class="text-gray-400">Peer Learning Session • Virtual</p>
+                            </div>
+                            <span class="text-blue-400">2023</span>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 border-t border-gray-700 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <p class="text-gray-400">© 2026 Komal Singh Shekhawat. All rights reserved.</p>
+                <div class="mt-4 flex justify-center space-x-6">
+                    <a href="https://www.linkedin.com/in/komal-singh-shekhawat-054853234/" class="text-gray-400 hover:text-blue-400 transition-colors">
+                        <span class="sr-only">LinkedIn</span>
+                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/komal8949" class="text-gray-400 hover:text-blue-400 transition-colors">
+                        <span class="sr-only">GitHub</span>
+                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors">
+                        <span class="sr-only">Twitter</span>
+                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // Scroll Reveal Animation
+        function initScrollReveal() {
+            const revealElements = document.querySelectorAll('.reveal');
+            
+            const revealObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+            
+            revealElements.forEach(element => {
+                revealObserver.observe(element);
+            });
+        }
+
+        // Animate achievement counters
+        function animateCounters() {
+            const counters = document.querySelectorAll('.achievement-counter');
+            
+            const counterObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const target = parseInt(entry.target.dataset.target);
+                        animateCounter(entry.target, target);
+                        counterObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            counters.forEach(counter => {
+                counterObserver.observe(counter);
+            });
+        }
+        
+        function animateCounter(element, target) {
+            let current = 0;
+            const increment = target / 100;
+            const duration = 2000;
+            const stepTime = duration / 100;
+            
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                element.textContent = Math.floor(current);
+            }, stepTime);
+        }
+
+        // Initialize charts
+        function initCharts() {
+            initSkillsTimelineChart();
+            initSkillsCategoryChart();
+        }
+
+        function initSkillsTimelineChart() {
+            const chartElement = document.getElementById('skills-timeline-chart');
+            if (!chartElement) return;
+            
+            const chart = echarts.init(chartElement);
+            
+            const option = {
+                backgroundColor: 'transparent',
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                xAxis: {
+                    type: 'category',
+                    data: ['2022', '2023', '2024','2025'],
+                    axisLine: {
+                        lineStyle: {
+                            color: '#404040'
+                        }
+                    },
+                    axisLabel: {
+                        color: '#b0b0b0'
+                    }
+                },
+                yAxis: {
+                    type: 'value',
+                    name: 'Proficiency Level',
+                    nameTextStyle: {
+                        color: '#b0b0b0'
+                    },
+                    axisLine: {
+                        lineStyle: {
+                            color: '#404040'
+                        }
+                    },
+                    axisLabel: {
+                        color: '#b0b0b0'
+                    },
+                    splitLine: {
+                        lineStyle: {
+                            color: '#404040'
+                        }
+                    }
+                },
+                series: [
+                    {
+                        name: 'Frontend',
+                        type: 'line',
+                        data: [60, 70, 80, 85, 88, 90],
+                        smooth: true,
+                        lineStyle: { color: '#00a8ff', width: 3 },
+                        itemStyle: { color: '#00a8ff' }
+                    },
+                    {
+                        name: 'Backend',
+                        type: 'line',
+                        data: [50, 65, 75, 80, 83, 85],
+                        smooth: true,
+                        lineStyle: { color: '#00b894', width: 3 },
+                        itemStyle: { color: '#00b894' }
+                    },
+                    {
+                        name: 'Data Analysis',
+                        type: 'line',
+                        data: [40, 60, 75, 85, 90, 92],
+                        smooth: true,
+                        lineStyle: { color: '#fdcb6e', width: 3 },
+                        itemStyle: { color: '#fdcb6e' }
+                    }
+                ],
+                legend: {
+                    textStyle: {
+                        color: '#b0b0b0'
+                    }
+                }
+            };
+            
+            chart.setOption(option);
+            
+            window.addEventListener('resize', () => {
+                chart.resize();
+            });
+        }
+
+        function initSkillsCategoryChart() {
+            const chartElement = document.getElementById('skills-category-chart');
+            if (!chartElement) return;
+            
+            const chart = echarts.init(chartElement);
+            
+            const option = {
+                backgroundColor: 'transparent',
+                tooltip: {
+                    trigger: 'item',
+                    backgroundColor: '#2d2d2d',
+                    borderColor: '#404040',
+                    textStyle: {
+                        color: '#ffffff'
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    radius: ['40%', '70%'],
+                    center: ['50%', '50%'],
+                    data: [
+                        { value: 30, name: 'Frontend', itemStyle: { color: '#00a8ff' } },
+                        { value: 25, name: 'Backend', itemStyle: { color: '#00b894' } },
+                        { value: 20, name: 'Data Analysis', itemStyle: { color: '#fdcb6e' } },
+                        { value: 15, name: 'DevOps', itemStyle: { color: '#e17055' } },
+                        { value: 10, name: 'Other', itemStyle: { color: '#6c5ce7' } }
+                    ],
+                    emphasis: {
+                        itemStyle: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    },
+                    label: {
+                        color: '#b0b0b0'
+                    }
+                }]
+            };
+            
+            chart.setOption(option);
+            
+            window.addEventListener('resize', () => {
+                chart.resize();
+            });
+        }
+
+        // Initialize animations when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            initScrollReveal();
+            animateCounters();
+            initCharts();
+        });
+    </script>
+</body>
+</html>
