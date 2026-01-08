@@ -88,7 +88,7 @@ I specialize in:
   <img src="assets/portfolio-contact.png" width="45%" />
 </p>
 
-> 📌 *Add screenshots inside an `assets/` folder*
+
 
 ---
 
