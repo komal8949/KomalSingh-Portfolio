@@ -103,8 +103,8 @@ I specialize in:
 
 ## 📬 Contact
 
-📧 Email: *your-email*  
-💼 LinkedIn: *your-linkedin*  
+📧 Email: *komalsinghshekhawat825@gmail.com*  
+💼 LinkedIn: *https://www.linkedin.com/in/komal-singh-shekhawat-054853234*  
 🌐 Portfolio: https://komal-singh-shekhawat-portfolio.vercel.app/
 
 ---
