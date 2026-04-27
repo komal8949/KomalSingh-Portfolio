@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const typedElement = document.getElementById('typed-name');
         if (typedElement) {
             new Typed('#typed-name', {
-                strings: ['Komal Singh Shekhawat', 'Data Scientist Enthusiast', 'Problem Solver'],
+                strings: ['Komal Singh Shekhawat', 'Python / Full Stack Developer', 'Problem Solver'],
                 typeSpeed: 100,
                 backSpeed: 50,
                 backDelay: 2000,
@@ -109,12 +109,12 @@ document.addEventListener('DOMContentLoaded', function() {
             backgroundColor: 'transparent',
             radar: {
                 indicator: [
-                    { name: 'Frontend', max: 100 },
-                    { name: 'Backend', max: 100 },
-                    { name: 'Database', max: 100 },
-                    { name: 'Data Analysis', max: 100 },
-                    { name: 'DevOps', max: 100 },
-                    { name: 'UI/UX', max: 100 }
+                    { name: 'Python', max: 100 },
+                    { name: 'Full Stack', max: 100 },
+                    { name: 'SQL/Data', max: 100 },
+                    { name: 'ML Basics', max: 100 },
+                    { name: 'Power BI', max: 100 },
+                    { name: 'LLM Basics', max: 100 }
                 ],
                 axisName: {
                     color: '#b0b0b0',
@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function() {
             series: [{
                 type: 'radar',
                 data: [{
-                    value: [90, 85, 80, 95, 75, 70],
+                    value: [90, 82, 85, 78, 88, 70],
                     name: 'Skills',
                     areaStyle: {
                         color: 'rgba(0, 168, 255, 0.2)'
@@ -183,7 +183,7 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             xAxis: {
                 type: 'category',
-                data: ['2022', '2023', '2024','2025'],
+                data: ['2023', '2024', '2025', '2026'],
                 axisLine: {
                     lineStyle: {
                         color: '#404040'
@@ -214,7 +214,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             },
             series: [{
-                data: [1, 2, 3, 4, 5, 5],
+                data: [0.8, 1.4, 2.0, 2.4],
                 type: 'line',
                 smooth: true,
                 lineStyle: {

@@ -46,6 +46,9 @@
             border: 1px solid #404040;
             transition: all 0.4s ease;
             overflow: hidden;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
         }
         .project-card:hover {
             transform: translateY(-8px) scale(1.02);
@@ -157,7 +160,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center reveal">
                 <h1 class="text-5xl font-bold text-white mb-6">My Projects</h1>
-                <p class="text-xl text-gray-400 mb-8">Data-driven solutions and innovative applications</p>
+                <p class="text-xl text-gray-400 mb-8">Case-study style projects with code links and practical outcomes</p>
             </div>
         </div>
     </section>
@@ -181,17 +184,17 @@
                     <button class="filter-btn active px-4 py-2 rounded-lg font-medium" data-filter="all">
                         All Projects
                     </button>
-                    <button class="filter-btn px-4 py-2 rounded-lg font-medium" data-filter="react">
-                        React
+                    <button class="filter-btn px-4 py-2 rounded-lg font-medium" data-filter="data-analytics">
+                        Data Analytics
                     </button>
                     <button class="filter-btn px-4 py-2 rounded-lg font-medium" data-filter="python">
                         Python
                     </button>
-                    <button class="filter-btn px-4 py-2 rounded-lg font-medium" data-filter="data-viz">
-                        Data Viz
+                    <button class="filter-btn px-4 py-2 rounded-lg font-medium" data-filter="machine-learning">
+                        Machine Learning
                     </button>
-                    <button class="filter-btn px-4 py-2 rounded-lg font-medium" data-filter="full-stack">
-                        Full Stack
+                    <button class="filter-btn px-4 py-2 rounded-lg font-medium" data-filter="powerbi">
+                        Power BI
                     </button>
                 </div>
             </div>
@@ -205,10 +208,11 @@
 
             <!-- DATA ANALYTICS PROJECT 1 -->
             <div class="project-card rounded-xl overflow-hidden reveal"
+                 data-project-id="project1"
                  data-tags="data-analytics powerbi python sql"
                  data-title="Sales Performance Dashboard">
-                <img src="./resources/project-1.jpg" alt="Sales Dashboard" class="w-full h-48 object-cover">
-                <div class="p-6">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80" alt="Sales dashboard analytics" class="w-full h-48 object-cover">
+                <div class="p-6 flex flex-col flex-1">
                     <h3 class="text-xl font-semibold text-white mb-2">Sales Performance Dashboard</h3>
                     <p class="text-gray-400 mb-4">
                         End-to-end sales analytics project analyzing revenue, customer segments, and product performance using Power BI.
@@ -219,7 +223,7 @@
                         <span class="tech-tag px-3 py-1 rounded-full text-sm">SQL</span>
                         <span class="tech-tag px-3 py-1 rounded-full text-sm">Excel</span>
                     </div>
-                    <button class="text-blue-400 hover:text-blue-300 font-medium">
+                    <button type="button" onclick="openProjectModal('project1')" class="text-blue-400 hover:text-blue-300 font-medium view-details-btn inline-flex items-center mt-auto pt-2 whitespace-nowrap">
                         View Details
                     </button>
                 </div>
@@ -227,21 +231,22 @@
 
             <!-- DATA ANALYTICS PROJECT 2 -->
             <div class="project-card rounded-xl overflow-hidden reveal"
-                 data-tags="data-analytics powerbi eda"
-                 data-title="Customer Churn Analysis">
-                <img src="./resources/project-2.jpg" alt="Customer Churn Analysis" class="w-full h-48 object-cover">
-                <div class="p-6">
-                    <h3 class="text-xl font-semibold text-white mb-2">Customer Churn Analysis</h3>
+                 data-project-id="project2"
+                 data-tags="data-analytics python ab-testing"
+                 data-title="A/B Testing Analysis">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80" alt="A/B testing and performance metrics" class="w-full h-48 object-cover">
+                <div class="p-6 flex flex-col flex-1">
+                    <h3 class="text-xl font-semibold text-white mb-2">A/B Testing Analysis</h3>
                     <p class="text-gray-400 mb-4">
-                        Analyzed customer behavior to identify churn drivers and created interactive dashboards for retention insights.
+                        Performed controlled experiment analysis to compare variant performance and identify statistically meaningful improvements.
                     </p>
                     <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="tech-tag px-3 py-1 rounded-full text-sm">Power BI</span>
                         <span class="tech-tag px-3 py-1 rounded-full text-sm">Python</span>
-                        <span class="tech-tag px-3 py-1 rounded-full text-sm">EDA</span>
+                        <span class="tech-tag px-3 py-1 rounded-full text-sm">A/B Testing</span>
+                        <span class="tech-tag px-3 py-1 rounded-full text-sm">Statistics</span>
                         <span class="tech-tag px-3 py-1 rounded-full text-sm">Pandas</span>
                     </div>
-                    <button class="text-blue-400 hover:text-blue-300 font-medium">
+                    <button type="button" onclick="openProjectModal('project2')" class="text-blue-400 hover:text-blue-300 font-medium view-details-btn inline-flex items-center mt-auto pt-2 whitespace-nowrap">
                         View Details
                     </button>
                 </div>
@@ -249,10 +254,11 @@
 
             <!-- MACHINE LEARNING PROJECT 1 -->
             <div class="project-card rounded-xl overflow-hidden reveal"
+                 data-project-id="project3"
                  data-tags="machine-learning classification python"
                  data-title="Image Classification System">
-                <img src="./resources/project-3.jpg" alt="Image Classification" class="w-full h-48 object-cover">
-                <div class="p-6">
+                <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=80" alt="AI image classification concept" class="w-full h-48 object-cover">
+                <div class="p-6 flex flex-col flex-1">
                     <h3 class="text-xl font-semibold text-white mb-2">Image Classification System</h3>
                     <p class="text-gray-400 mb-4">
                         Built an image classification model using deep learning to classify images into multiple categories.
@@ -263,7 +269,7 @@
                         <span class="tech-tag px-3 py-1 rounded-full text-sm">CNN</span>
                         <span class="tech-tag px-3 py-1 rounded-full text-sm">Computer Vision</span>
                     </div>
-                    <button class="text-blue-400 hover:text-blue-300 font-medium">
+                    <button type="button" onclick="openProjectModal('project3')" class="text-blue-400 hover:text-blue-300 font-medium view-details-btn inline-flex items-center mt-auto pt-2 whitespace-nowrap">
                         View Details
                     </button>
                 </div>
@@ -271,10 +277,11 @@
 
             <!-- MACHINE LEARNING PROJECT 2 -->
             <div class="project-card rounded-xl overflow-hidden reveal"
+                 data-project-id="project4"
                  data-tags="machine-learning prediction python"
                  data-title="Stock Price Prediction">
-                <img src="./resources/project-4.jpg" alt="Stock Prediction" class="w-full h-48 object-cover">
-                <div class="p-6">
+                <img src="https://images.unsplash.com/photo-1642790106117-e829e14a795f?auto=format&fit=crop&w=1200&q=80" alt="Stock market prediction charts" class="w-full h-48 object-cover">
+                <div class="p-6 flex flex-col flex-1">
                     <h3 class="text-xl font-semibold text-white mb-2">Stock Price Prediction</h3>
                     <p class="text-gray-400 mb-4">
                         Time-series forecasting model to predict stock prices using historical market data.
@@ -285,7 +292,7 @@
                         <span class="tech-tag px-3 py-1 rounded-full text-sm">Pandas</span>
                         <span class="tech-tag px-3 py-1 rounded-full text-sm">Scikit-learn</span>
                     </div>
-                    <button class="text-blue-400 hover:text-blue-300 font-medium">
+                    <button type="button" onclick="openProjectModal('project4')" class="text-blue-400 hover:text-blue-300 font-medium view-details-btn inline-flex items-center mt-auto pt-2 whitespace-nowrap">
                         View Details
                     </button>
                 </div>
@@ -293,21 +300,22 @@
 
             <!-- DATA ENGINEERING PROJECT 1 -->
             <div class="project-card rounded-xl overflow-hidden reveal"
-                 data-tags="data-engineering pipeline python"
-                 data-title="ETL Data Pipeline">
-                <img src="./resources/project-5.jpg" alt="ETL Pipeline" class="w-full h-48 object-cover">
-                <div class="p-6">
-                    <h3 class="text-xl font-semibold text-white mb-2">ETL Data Pipeline</h3>
+                 data-project-id="project5"
+                 data-tags="data-analytics python classification"
+                 data-title="Titanic Survival Analysis">
+                <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80" alt="Data analysis and classification dashboard" class="w-full h-48 object-cover">
+                <div class="p-6 flex flex-col flex-1">
+                    <h3 class="text-xl font-semibold text-white mb-2">Titanic Survival Analysis</h3>
                     <p class="text-gray-400 mb-4">
-                        Designed an automated ETL pipeline to extract, transform, and load data for analytics reporting.
+                        Built a classification workflow on Titanic dataset with preprocessing, feature analysis, and survival prediction modeling.
                     </p>
                     <div class="flex flex-wrap gap-2 mb-4">
                         <span class="tech-tag px-3 py-1 rounded-full text-sm">Python</span>
-                        <span class="tech-tag px-3 py-1 rounded-full text-sm">SQL</span>
-                        <span class="tech-tag px-3 py-1 rounded-full text-sm">ETL</span>
+                        <span class="tech-tag px-3 py-1 rounded-full text-sm">Classification</span>
+                        <span class="tech-tag px-3 py-1 rounded-full text-sm">EDA</span>
                         <span class="tech-tag px-3 py-1 rounded-full text-sm">Pandas</span>
                     </div>
-                    <button class="text-blue-400 hover:text-blue-300 font-medium">
+                    <button type="button" onclick="openProjectModal('project5')" class="text-blue-400 hover:text-blue-300 font-medium view-details-btn inline-flex items-center mt-auto pt-2 whitespace-nowrap">
                         View Details
                     </button>
                 </div>
@@ -315,26 +323,30 @@
 
             <!-- DATA ENGINEERING PROJECT 2 -->
             <div class="project-card rounded-xl overflow-hidden reveal"
-                 data-tags="data-engineering cloud aws"
-                 data-title="Cloud-Based Data Pipeline">
-                <img src="./resources/project-6.jpg" alt="Cloud Data Pipeline" class="w-full h-48 object-cover">
-                <div class="p-6">
-                    <h3 class="text-xl font-semibold text-white mb-2">Cloud-Based Data Pipeline</h3>
+                 data-project-id="project6"
+                 data-tags="machine-learning prediction python"
+                 data-title="Predictive Modeling">
+                <img src="https://images.unsplash.com/photo-1509228627152-72ae9ae6848d?auto=format&fit=crop&w=1200&q=80" alt="Predictive modeling and machine learning workflow" class="w-full h-48 object-cover">
+                <div class="p-6 flex flex-col flex-1">
+                    <h3 class="text-xl font-semibold text-white mb-2">Predictive Modeling</h3>
                     <p class="text-gray-400 mb-4">
-                        Built a scalable cloud data pipeline for ingestion, storage, and analytics using AWS services.
+                        Developed an end-to-end predictive modeling notebook covering data preparation, training, and performance evaluation.
                     </p>
                     <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="tech-tag px-3 py-1 rounded-full text-sm">AWS</span>
                         <span class="tech-tag px-3 py-1 rounded-full text-sm">Python</span>
-                        <span class="tech-tag px-3 py-1 rounded-full text-sm">Data Engineering</span>
-                        <span class="tech-tag px-3 py-1 rounded-full text-sm">Cloud</span>
+                        <span class="tech-tag px-3 py-1 rounded-full text-sm">Machine Learning</span>
+                        <span class="tech-tag px-3 py-1 rounded-full text-sm">Prediction</span>
+                        <span class="tech-tag px-3 py-1 rounded-full text-sm">Scikit-learn</span>
                     </div>
-                    <button class="text-blue-400 hover:text-blue-300 font-medium">
+                    <button type="button" onclick="openProjectModal('project6')" class="text-blue-400 hover:text-blue-300 font-medium view-details-btn inline-flex items-center mt-auto pt-2 whitespace-nowrap">
                         View Details
                     </button>
                 </div>
             </div>
 
+        </div>
+        <div id="no-results" class="hidden text-center text-gray-400 mt-10">
+            No projects found for the selected filter or search term.
         </div>
     </div>
 </section>
@@ -351,11 +363,11 @@
                 <!-- Dynamic content will be inserted here -->
             </div>
             
-            <div class="flex gap-4 mt-8">
-                <a href="#" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-all">
+            <div class="flex flex-wrap gap-4 mt-8">
+                <a id="modal-live-link" href="#" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-all">
                     View Live Demo
                 </a>
-                <a href="#" class="border border-gray-600 text-gray-300 px-6 py-3 rounded-lg font-medium hover:border-gray-400 hover:text-white transition-all">
+                <a id="modal-code-link" href="#" target="_blank" rel="noopener noreferrer" class="border border-gray-600 text-gray-300 px-6 py-3 rounded-lg font-medium hover:border-gray-400 hover:text-white transition-all">
                     View Code
                 </a>
             </div>
@@ -400,82 +412,94 @@
         // Project data for modals
         const projectData = {
             project1: {
-                title: "Analytics Dashboard",
-                description: "A comprehensive business intelligence platform that transforms raw data into actionable insights through interactive visualizations and real-time analytics.",
+                title: "Sales Performance Dashboard",
+                codeUrl: "https://github.com/komal8949/OLA-Dashboard/tree/main/OLA%20Perfromance%20Analytics%20Dashboard",
+                liveDemoUrl: "",
+                description: "Aligned with the OLA Dashboard repository, this project analyzes ride operations, bookings, and revenue behavior through an interactive BI dashboard.",
                 features: [
-                    "Real-time data processing with Apache Kafka",
-                    "Interactive dashboards with D3.js and Chart.js",
-                    "Advanced filtering and drill-down capabilities",
-                    "Automated report generation and scheduling",
-                    "Multi-tenant architecture with role-based access control"
+                    "KPI tracking for bookings, cancellations, and revenue trends",
+                    "City and time-based drill-down views for ride performance",
+                    "Vehicle category breakdown and demand pattern analysis",
+                    "Interactive filters for faster business insight extraction",
+                    "Power BI storytelling focused on operational decisions"
                 ],
-                challenges: "Handling large datasets efficiently while maintaining responsive user interface. Implemented data caching and lazy loading strategies.",
-                results: "Reduced data processing time by 60% and increased user engagement by 45%. Currently used by 500+ business analysts daily."
+                challenges: "Structuring transportation operations data into a dashboard-ready model while preserving meaningful ride-level insights.",
+                results: "Created a business-ready dashboard that makes trend detection and performance monitoring significantly faster."
             },
             project2: {
-                title: "Fintech Platform",
-                description: "Secure financial trading application with real-time market data analysis, portfolio management, and risk assessment tools.",
+                title: "A/B Testing Analysis",
+                codeUrl: "https://github.com/komal8949/Code_Alpha_Data_Science/blob/main/ABTesting.ipynb",
+                liveDemoUrl: "",
+                description: "Experiment analysis project based on Code Alpha work to compare two variants and evaluate whether observed performance uplift is statistically valid.",
                 features: [
-                    "Real-time market data streaming",
-                    "Advanced charting with technical indicators",
-                    "Portfolio optimization algorithms",
-                    "Risk management and compliance monitoring",
-                    "Secure payment processing integration"
+                    "Hypothesis framing for control vs treatment variants",
+                    "Metric comparison using statistical testing methods",
+                    "Confidence interval and significance interpretation",
+                    "Python notebook workflow for repeatable analysis",
+                    "Decision-ready experiment summary outputs"
                 ],
-                challenges: "Ensuring sub-second latency for real-time data while maintaining security and compliance with financial regulations.",
-                results: "Processed over $50M in transactions with 99.9% uptime. Achieved 40% faster trade execution compared to existing solutions."
+                challenges: "Avoiding false positives while evaluating limited-sample experiment data.",
+                results: "Delivered a statistically grounded recommendation for choosing the better-performing variant."
             },
             project3: {
-                title: "Healthcare Management System",
-                description: "Comprehensive patient management system with predictive analytics for treatment outcomes and resource optimization.",
+                title: "Image Classification System",
+                codeUrl: "https://github.com/komal8949/ImageClassifcation-Pytorch/tree/main/ImageClassification-Pytorch",
+                liveDemoUrl: "",
+                description: "Developed a deep learning-based image classification system to categorize images into multiple classes with optimized training and evaluation.",
                 features: [
-                    "Electronic health records (EHR) management",
-                    "Predictive analytics for treatment outcomes",
-                    "Resource allocation optimization",
-                    "Patient appointment scheduling system",
-                    "HIPAA-compliant security measures"
+                    "Convolutional Neural Network model training for image categories",
+                    "Data augmentation pipeline for better model generalization",
+                    "Training and validation performance tracking",
+                    "Model evaluation with accuracy and confusion matrix analysis",
+                    "Inference-ready script for class prediction"
                 ],
-                challenges: "Balancing data accessibility with strict healthcare privacy requirements while providing meaningful insights.",
-                results: "Improved patient care coordination by 35% and reduced administrative overhead by 25% across 3 healthcare facilities."
+                challenges: "Improving model performance on visually similar classes while avoiding overfitting.",
+                results: "Achieved stable classification performance and improved prediction consistency through tuning."
             },
             project4: {
-                title: "E-commerce Platform",
-                description: "Full-stack e-commerce solution with advanced inventory management, payment processing, and customer analytics dashboard.",
+                title: "Stock Price Prediction",
+                codeUrl: "https://github.com/komal8949/Code_Alpha_Data_Science/blob/main/stockLSTM%20(2).ipynb",
+                liveDemoUrl: "",
+                description: "Time-series forecasting project from the Code Alpha repository using LSTM-based modeling on historical stock market signals.",
                 features: [
-                    "Responsive product catalog with search and filtering",
-                    "Secure payment processing with multiple providers",
-                    "Inventory management and automated restocking",
-                    "Customer behavior analytics and recommendations",
-                    "Multi-vendor marketplace support"
+                    "Historical stock data preprocessing and trend analysis",
+                    "Sequence preparation for LSTM training windows",
+                    "Deep learning model training for trend forecasting",
+                    "Performance evaluation using error metrics",
+                    "Visualization of actual vs predicted values"
                 ],
-                challenges: "Handling high-traffic loads during peak shopping seasons while maintaining fast response times.",
-                results: "Successfully handled 10,000+ concurrent users during Black Friday sales. Increased conversion rate by 30%."
+                challenges: "Managing noisy market data and improving prediction reliability for volatile periods.",
+                results: "Built an interpretable baseline model useful for directional trend understanding."
             },
             project5: {
-                title: "Social Media Analytics",
-                description: "Sentiment analysis dashboard that processes social media data to provide insights on brand perception and market trends.",
+                title: "Titanic Survival Analysis",
+                codeUrl: "https://github.com/komal8949/Code_Alpha_Data_Science/blob/main/TASK1_Titanic%20(1).ipynb",
+                liveDemoUrl: "",
+                description: "Classification-focused data science project using the Titanic dataset to model survival prediction based on passenger attributes.",
                 features: [
-                    "Real-time social media data ingestion",
-                    "Natural language processing for sentiment analysis",
-                    "Interactive data visualizations",
-                    "Competitor analysis and benchmarking",
-                    "Automated reporting and alerts"
+                    "Data cleaning and feature preparation for modeling",
+                    "Exploratory analysis of class, age, and fare patterns",
+                    "Classification model training and evaluation",
+                    "Notebook-based experimentation with metrics comparison",
+                    "Interpretation of key factors influencing survival outcomes"
                 ],
-                challenges: "Processing unstructured text data at scale while maintaining accuracy in sentiment classification.",
-                results: "Analyzed 1M+ social media posts daily with 85% accuracy in sentiment classification. Used by 50+ marketing agencies."
+                challenges: "Handling missing values and selecting useful features for stable prediction quality.",
+                results: "Built a clean baseline survival model and extracted meaningful dataset insights."
             },
             project6: {
-                title: "Project Management Tool",
-                description: "Team collaboration platform with advanced task management, time tracking, and real-time communication features.",
+                title: "Predictive Modeling",
+                codeUrl: "https://github.com/komal8949/Code_Alpha_Data_Science/blob/main/PredictiveModel.ipynb",
+                liveDemoUrl: "",
+                description: "General predictive modeling workflow from the Code Alpha repository focused on preprocessing, training, and model performance analysis.",
                 features: [
-                    "Kanban and Scrum board implementations",
-                    "Real-time collaboration with WebSockets",
-                    "Time tracking and productivity analytics",
-                    "File sharing and version control",
-                    "Integration with popular development tools"
+                    "Data preprocessing and feature engineering workflow",
+                    "Model training with evaluation loop",
+                    "Error metric tracking for model comparison",
+                    "Notebook-based experimentation and iteration",
+                    "Result interpretation for practical prediction use"
                 ],
-                challenges: "Ensuring real-time synchronization across multiple users while maintaining data consistency.",
-                results: "Increased team productivity by 40% and reduced project delivery times by 25% for 200+ teams."
+                challenges: "Selecting model settings that improve performance without overfitting.",
+                results: "Delivered a reusable predictive notebook structure for future experiments."
             }
         };
 
@@ -484,6 +508,7 @@
         const projectCards = document.querySelectorAll('.project-card');
         const searchInput = document.getElementById('search-input');
         const noResults = document.getElementById('no-results');
+        const detailButtons = document.querySelectorAll('.view-details-btn');
 
         filterButtons.forEach(button => {
             button.addEventListener('click', function() {
@@ -496,6 +521,16 @@
         });
 
         searchInput.addEventListener('input', filterProjects);
+
+        detailButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const projectCard = this.closest('.project-card');
+                if (!projectCard) return;
+                const projectId = projectCard.dataset.projectId;
+                if (!projectId) return;
+                openProjectModal(projectId);
+            });
+        });
 
         function filterProjects() {
             const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
@@ -530,6 +565,8 @@
             const modal = document.getElementById('project-modal');
             const modalTitle = document.getElementById('modal-title');
             const modalContent = document.getElementById('modal-content');
+            const modalLiveLink = document.getElementById('modal-live-link');
+            const modalCodeLink = document.getElementById('modal-code-link');
             
             const project = projectData[projectId];
             if (!project) return;
@@ -562,6 +599,26 @@
             modal.classList.remove('hidden');
             modal.classList.add('flex');
             document.body.style.overflow = 'hidden';
+
+            if (project.codeUrl && project.codeUrl !== '#') {
+                modalCodeLink.href = project.codeUrl;
+                modalCodeLink.textContent = 'View Code';
+                modalCodeLink.classList.remove('opacity-50', 'cursor-not-allowed', 'pointer-events-none');
+            } else {
+                modalCodeLink.href = '#';
+                modalCodeLink.textContent = 'Code Link Not Available';
+                modalCodeLink.classList.add('opacity-50', 'cursor-not-allowed', 'pointer-events-none');
+            }
+
+            if (project.liveDemoUrl && project.liveDemoUrl.trim() !== '') {
+                modalLiveLink.href = project.liveDemoUrl;
+                modalLiveLink.textContent = 'View Live Demo';
+                modalLiveLink.classList.remove('opacity-50', 'cursor-not-allowed', 'pointer-events-none');
+            } else {
+                modalLiveLink.href = '#';
+                modalLiveLink.textContent = 'Live Demo Not Available';
+                modalLiveLink.classList.add('opacity-50', 'cursor-not-allowed', 'pointer-events-none');
+            }
         }
 
         function closeProjectModal() {
@@ -570,6 +627,10 @@
             modal.classList.remove('flex');
             document.body.style.overflow = 'auto';
         }
+
+        // Expose modal controls globally for inline handlers
+        window.openProjectModal = openProjectModal;
+        window.closeProjectModal = closeProjectModal;
 
         // Close modal on outside click
         document.getElementById('project-modal').addEventListener('click', function(e) {

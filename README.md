@@ -1,82 +1,79 @@
 # KomalSingh-Portfolio
-<!-- ===================== -->
-<!-- README BANNER -->
-<!-- ===================== -->
+
 <p align="center">
   <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0F2027,50:203A43,100:2C5364&height=200&section=header&text=Komal%20Singh%20Shekhawat&fontSize=40&fontColor=ffffff&fontAlignY=35" />
 </p>
 
-<h3 align="center">
-Data Analyst • Data Scientist • Machine Learning Enthusiast
-</h3>
+<h3 align="center">Python Full-Stack Developer Intern • Data Analytics • AI Fundamentals</h3>
 
 <p align="center">
-  🌐 <a href="https://komal-singh-shekhawat-portfolio.vercel.app/">Live Portfolio</a> • 
-  💼 <a href="https://www.linkedin.com/">LinkedIn</a> • 
-  🐙 <a href="https://github.com/">GitHub</a>
+  🌐 <a href="https://komal-singh-shekhawat-portfolio.vercel.app/">Live Portfolio</a> •
+  💼 <a href="https://www.linkedin.com/in/komal-singh-shekhawat-054853234">LinkedIn</a> •
+  🐙 <a href="https://github.com/komal8949">GitHub</a>
 </p>
 
----
+This repository contains my personal portfolio website showcasing:
+- current work experience at Seztech Inc,
+- project case studies with code links,
+- skills across full-stack, data analytics, and AI foundations.
 
-## 👋 About Me
+## Live Website
 
-I’m **Komal Singh Shekhawat**, a **BTech CSE (AIML) final-year student** passionate about  
-**Data Analytics, Data Science, Machine Learning, and Business Intelligence**.
+Visit: https://komal-singh-shekhawat-portfolio.vercel.app/
 
-I specialize in:
-- Turning raw data into **actionable insights**
-- Building **Power BI dashboards**
-- Creating **end-to-end ML & analytics projects**
-- Deploying **modern web portfolios**
+## Current Focus
 
----
+- Building and testing product features in live projects (`byvano.com`, `DeskTrust` testing support)
+- Working with Python, JavaScript, SQL, and Tailwind CSS
+- Applying data extraction and analysis in practical workflows
+- Strengthening LLM basics and AI-assisted development workflows
 
-## 🚀 Live Portfolio
+## Tech Stack
 
-🔗 **Visit here:**  
-👉 https://komal-singh-shekhawat-portfolio.vercel.app/
-
----
-
-## 🧰 Tech Stack & Skills
-
-### 🧠 Data & Analytics
+### Core
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![Power BI](https://img.shields.io/badge/Power_BI-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+
+### Web and Data
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 ![SQL](https://img.shields.io/badge/SQL-025E8C?style=for-the-badge&logo=postgresql&logoColor=white)
-![Machine Learning](https://img.shields.io/badge/Machine_Learning-102230?style=for-the-badge)
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
+![Power BI](https://img.shields.io/badge/Power_BI-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)
 
-### 💻 Web & Tools
-![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react)
-![Tailwind](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css)
-![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git)
-![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel)
+### Tools
+![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
+![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)
+![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
+![Cursor](https://img.shields.io/badge/Cursor-AI_Assisted_Dev-1F1F1F?style=for-the-badge)
 
----
+## Featured Project Mapping
 
-## 📊 GitHub Stats
+- **Sales Performance Dashboard** -> OLA Dashboard repository alignment
+- **A/B Testing Analysis** -> `Code_Alpha_Data_Science/ABTesting.ipynb`
+- **Stock Price Prediction** -> `Code_Alpha_Data_Science/stockLSTM (2).ipynb`
+- **Titanic Survival Analysis** -> `Code_Alpha_Data_Science/TASK1_Titanic (1).ipynb`
+- **Predictive Modeling** -> `Code_Alpha_Data_Science/PredictiveModel.ipynb`
+- **Image Classification (PyTorch)** -> dedicated image classification repository
 
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=komal8949&show_icons=true&theme=tokyonight" height="170"/>
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=komal8949&layout=compact&theme=tokyonight" height="170"/>
-</p>
+## Project Structure
 
----
+- `KomalSingh_Portfolio Website Build/` -> main website pages and assets
+- `assets/` -> README preview images
+- `README.md` -> project overview
 
-## 📂 Featured Projects
+## Run Locally
 
-✔ **OLA Performance Dashboard** – Power BI business analytics  
-✔ **Movie Recommender System** – ML + cosine similarity  
-✔ **Customer Churn Analysis** – Business decision insights  
-✔ **Facial Recognition Attendance System** – Computer Vision  
-✔ **E-commerce Analytics Dashboard** – Revenue & funnel analysis  
+Because this is a static portfolio:
 
-> Each project follows:
-> **Problem Framing → Data Cleaning → EDA → Modeling → Visualization → Insights**
+1. Clone this repository
+2. Open `KomalSingh_Portfolio Website Build/index.html` in your browser  
+   or serve it with any static server
 
----
+Example (VS Code Live Server or any local static host) works fine.
 
-## 🖼️ Portfolio Preview
+## Portfolio Preview
 
 <p align="center">
   <img src="assets/portfolio-home.png" width="45%" />
@@ -88,28 +85,13 @@ I specialize in:
   <img src="assets/portfolio-contact.png" width="45%" />
 </p>
 
+## Contact
 
+- Email: `komalsinghshekhawat825@gmail.com`
+- LinkedIn: https://www.linkedin.com/in/komal-singh-shekhawat-054853234
+- Portfolio: https://komal-singh-shekhawat-portfolio.vercel.app/
 
----
-
-## 🎯 Why This Portfolio?
-
-- Built for **recruiters & hiring managers**
-- Highlights **real-world data projects**
-- Demonstrates **business + technical thinking**
-- Optimized for **Data Analyst / Data Scientist roles**
-
----
-
-## 📬 Contact
-
-📧 Email: *komalsinghshekhawat825@gmail.com*  
-💼 LinkedIn: *https://www.linkedin.com/in/komal-singh-shekhawat-054853234*  
-🌐 Portfolio: https://komal-singh-shekhawat-portfolio.vercel.app/
-
----
-
-⭐ **If you like this portfolio, don’t forget to star the repo!**
+If this project is helpful, consider starring the repository.
 
 <p align="center">
   <img src="https://capsule-render.vercel.app/api?type=waving&color=0:2C5364,100:0F2027&height=120&section=footer"/>
